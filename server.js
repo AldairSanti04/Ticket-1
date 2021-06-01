@@ -1,12 +1,13 @@
+const express = require('express');
 const app = express();
 require('dotenv').config();
 const cors = require('cors');
-const midd = require('./middleware/midd');
 const sequelize = require('./db/conexion');
+const vistaPresupuestos = require('./app/views/presupuestos.view')
 
 app.use(express.json());
 app.use(cors());
-app.use(midd.limiter);
+//app.use(midd.limiter);
 
 app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'ejs')
@@ -25,14 +26,15 @@ app.use((err, req, res, next)=> {
 async function inicioServidor() {
     try {
         await sequelize.authenticate();
-        console.log('Conexion con la DB correcta!')
+        console.log('Conexion con la DB correcta!');
         app.listen(process.env.PORT, function (){
-            console.log(`Sistema iniciado en el puerto ${process.env.PORT}`)
+            console.log(`Sistema iniciado en el puerto ${process.env.PORT}`);
         })
     }catch (err){
-        console.log(err)
-        console.log('No se pudo conectar con la DB')
+        console.log('No se pudo conectar con la DB');
     }
 }
 
 inicioServidor();
+
+vistaPresupuestos(app);
