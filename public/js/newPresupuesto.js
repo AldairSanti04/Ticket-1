@@ -79,13 +79,13 @@ class Presupuesto{
                 newCell.textContent = `${mes}`
             } else if(i === rowCount-3) {
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-egresos" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-egresos" step="any">`
             } else if(i === (rowCount-2)){
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-total-mes" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-total-mes" step="any">`
             } else if(i === (rowCount-1)){
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-acumulado-mes" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-acumulado-mes" step="any">`
             } else {
                 let newCell = row.insertCell(countCol-1);
                 newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}-ingresos" step="any">`
@@ -104,16 +104,16 @@ class Presupuesto{
                 newCell.textContent = `${mes}`
             } else if(i === (rowCount-1)){
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-total-mes" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-total-mes" step="any">`
             } else if(i === (rowCount-2)){
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-margen-mes" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-margen-mes" step="any">`
             } else if(i === rowCount-3) {
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-costos" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-costos" step="any">`
             } else {
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}-ventas" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}-ventas" step="any">`
             }
         }
     }
@@ -129,7 +129,7 @@ class Presupuesto{
                 newCell.textContent = `${mes}`
             } else if(i === (rowCount-1)){
                 let newCell = row.insertCell(countCol-2);
-                newCell.innerHTML = `<input disabled value="0" class="form-control ${selector}-total-mes" step="any">`
+                newCell.innerHTML = `<input readonly value="0" class="form-control ${selector}-total-mes" step="any">`
             }
             else {
                 let newCell = row.insertCell(countCol-2);
@@ -149,11 +149,11 @@ class Presupuesto{
                 newCell.textContent = `${mes}`
             } else if(i === (rowCount-1)){
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input disabled value="0" class="form-control ${selector}-total-mes" step="any">`
+                newCell.innerHTML = `<input readonly value="0" class="form-control ${selector}-total-mes" step="any">`
             }
             else {
                 let newCell = row.insertCell(countCol-1);
-                newCell.innerHTML = `<input value="0" disabled class="form-control ${selector}" step="any">`
+                newCell.innerHTML = `<input value="0" readonly class="form-control ${selector}" step="any">`
             }
         }
     }
@@ -241,7 +241,7 @@ class Presupuesto{
                             newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
                         } else if(i === (countCol-2)){
                             var newCell  = newRow.insertCell(i);
-                            newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+                            newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
                         } else {
                             var newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
@@ -276,7 +276,7 @@ class Presupuesto{
                             newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
                         } else if(i === (countCol-2)){
                             var newCell  = newRow.insertCell(i);
-                            newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+                            newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
                         } else {
                             var newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
@@ -328,10 +328,10 @@ class Presupuesto{
                 newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
             } else if(i === (countCol-2)){
                 var newCell  = newRow.insertCell(i);
-                newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+                newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
             } else if(i === 1){
                 var newCell  = newRow.insertCell(i);
-                newCell.innerHTML = `<input disabled value="${costo}" type="number" class="form-control ${selector}-costo-mensual" step="any">`
+                newCell.innerHTML = `<input readonly value="${costo}" type="number" class="form-control ${selector}-costo-mensual" step="any">`
             } else {
                 var newCell  = newRow.insertCell(i);
                 //Cambiar a Porcentaje
@@ -350,10 +350,10 @@ class Presupuesto{
                 newCell.textContent = `${rol}`
             } else if(i === (countCol-1)){
                 var newCell  = newRow.insertCell(i);
-                newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+                newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
             } else {
                 var newCell  = newRow.insertCell(i);
-                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}" step="any">`
+                newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}" step="any">`
             }
         }
     }
