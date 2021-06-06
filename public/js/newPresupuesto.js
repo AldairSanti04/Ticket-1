@@ -357,4 +357,48 @@ class Presupuesto{
             }
         }
     }
+    
+    //Funciones para eliminar Filas
+    eliminarFila(event){
+        Swal.fire({
+        title: '¿Seguro que quiere eliminar la fila seleccionada?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.preventDefault();
+                if(event.target.classList.contains('borrar-fila')){
+                    event.target.parentElement.parentElement.parentElement.remove();
+                } else if(event.target.parentElement.classList.contains('borrar-fila')) {
+                    event.target.parentElement.parentElement.parentElement.parentElement.remove();
+                }
+            }
+        })
+    }
+
+    eliminarFilas(event){
+        Swal.fire({
+        title: '¿Seguro que quiere eliminar la fila seleccionada?',
+        text: 'Esta acción eliminara las filas de las siguientes 2 tablas',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                event.preventDefault();
+                if(event.target.classList.contains('borrar-fila')){
+                    event.target.parentElement.parentElement.parentElement.remove();
+                } else if(event.target.parentElement.classList.contains('borrar-fila')) {
+                    event.target.parentElement.parentElement.parentElement.parentElement.remove();
+                }
+            }
+        })
+    }
 }
