@@ -11,4 +11,11 @@ module.exports = async (app)=> {
         }
     })
 
+    app.get('/index', async (req,res)=>{
+        try{
+            res.render('index');
+        }catch (err){
+            res.estatus(400).json('No se puede mostrar')
+        }
+    })
 }

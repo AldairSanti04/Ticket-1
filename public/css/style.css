@@ -1,0 +1,20 @@
+td{
+    min-width: 150px;
+    overflow: auto;
+  }
+
+input{
+  text-align: center;
+}
+
+thead{
+  font-weight: bold;
+}
+
+a{
+  padding: 10px;
+}
+
+.borrar-fila{
+  cursor: pointer;
+}
