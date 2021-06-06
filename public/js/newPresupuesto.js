@@ -218,4 +218,143 @@ class Presupuesto{
             row.remove(countCol-2);
         }
     }
+
+    //Funciones para agregar Filas
+    agregarFila(tableID, selector) {
+        Swal.fire({
+            title: 'Ingrese el Concepto',
+            input: 'text',
+            showCancelButton: true,
+            inputValidator: (concepto) => {
+                if (!concepto) {
+                    return 'Se requiere ingresar el nombre del Concepto'
+                } else {
+                    var tableRef = document.getElementById(tableID);
+                    var newRow   = tableRef.insertRow(1);
+                    let countCol = document.getElementById(tableID).rows[0].cells.length
+                    for(let i = 0; i < countCol; i++){
+                        if(i === 0){
+                            var newCell  = newRow.insertCell(i);
+                            newCell.textContent = `${concepto}`
+                        } else if(i === (countCol-1)){
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = `<div class="text-center"><button class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></button></div>`
+                        } else if(i === (countCol-2)){
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+                        } else {
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    addRowExtra(tableID, selector) {
+        Swal.fire({
+            title: 'Ingrese el Concepto',
+            input: 'text',
+            showCancelButton: true,
+            inputValidator: (concepto) => {
+                if (!concepto) {
+                    return 'Se requiere ingresar el nombre del Concepto'
+                } else {
+                    var tableRef = document.getElementById(tableID);
+                    var newRow   = tableRef.insertRow(1);
+                    let countCol = document.getElementById(tableID).rows[0].cells.length
+                    for(let i = 0; i < countCol; i++) {
+                        if(i === 0){
+                            var newCell  = newRow.insertCell(i);
+                            newCell.textContent = `${concepto}`
+                        } else if(i == 1) {
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = '<select class="form-select"><option>Opcion 1</option><option>Opcion 2</option><option>Opcion 3</option></select>'
+                        } else if(i === (countCol-1)){
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = `<div class="text-center"><button class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></button></div>`
+                        } else if(i === (countCol-2)){
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+                        } else {
+                            var newCell  = newRow.insertCell(i);
+                            newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    addRows() {
+        Swal.fire({
+            title: 'Rol del Recurso',
+            input: 'text',
+            showCancelButton: true,
+            inputValidator: (concepto) => {
+                if (!concepto) {
+                    return 'Se requiere ingresar el Rol del Recurso'
+                } else { 
+                    Swal.fire({
+                        title: 'Costo Mensual',
+                        input: 'number',
+                        showCancelButton: true,
+                        inputValidator: (costo) => {
+                            if (!costo) {
+                            return 'Se requiere ingresar el Costo Mensual'
+                            } else {
+                                this.addRowRecursos('TableAsignacion', 'input-asignacion', concepto, costo)
+                                this.addRowHijosRecursos('TableCostos', 'input-costos', concepto)
+                                this.addRowHijosRecursos('TableRCostos', 'input-resumen', concepto)
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    addRowRecursos(tableID, selector, rol, costo) {
+        var tableRef = document.getElementById(tableID);
+        var newRow   = tableRef.insertRow(1);
+        let countCol = document.getElementById(tableID).rows[0].cells.length
+        for(let i = 0; i < countCol; i++){
+            if(i === 0){
+                var newCell  = newRow.insertCell(i);
+                newCell.textContent = `${rol}`
+            } else if(i === (countCol-1)){
+                var newCell  = newRow.insertCell(i);
+                newCell.innerHTML = `<div class="text-center"><button class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></button></div>`
+            } else if(i === (countCol-2)){
+                var newCell  = newRow.insertCell(i);
+                newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+            } else if(i === 1){
+                var newCell  = newRow.insertCell(i);
+                newCell.innerHTML = `<input disabled value="${costo}" type="number" class="form-control ${selector}-costo-mensual" step="any">`
+            } else {
+                var newCell  = newRow.insertCell(i);
+                //Cambiar a Porcentaje
+                newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
+            }
+        }
+    }
+        
+    addRowHijosRecursos(tableID, selector, rol) {
+        var tableRef = document.getElementById(tableID);
+        var newRow   = tableRef.insertRow(1);
+        let countCol = document.getElementById(tableID).rows[0].cells.length
+        for(let i = 0; i < countCol; i++){
+            if(i === 0){
+                var newCell  = newRow.insertCell(i);
+                newCell.textContent = `${rol}`
+            } else if(i === (countCol-1)){
+                var newCell  = newRow.insertCell(i);
+                newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
+            } else {
+                var newCell  = newRow.insertCell(i);
+                newCell.innerHTML = `<input value="0" disabled type="number" class="form-control ${selector}" step="any">`
+            }
+        }
+    }
 }
