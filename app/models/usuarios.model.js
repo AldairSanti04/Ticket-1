@@ -41,3 +41,32 @@ const Usuarios = sequelize.define('usuarios', {
 })
 
 module.exports = Usuarios;
+
+module.exports.existenciaDeUsuario = async (usr)=>{
+  //chequear con la base de datos que exista el usuario
+  let resultado = await Usuarios.findOne({where: {usuario:usr.usuario}})
+  if (resultado === null){
+      return false
+  }else {
+      return true
+  }
+}
+
+module.exports.usuarioAutenticado = async (usr)=>{
+  //chequear con la base de datos que exista el usuario
+  let resultado = await Usuarios.findOne({where: {usuario:usr.usuario, pass: usr.pass}})
+  if (resultado === null){
+      return false
+  }else {
+      return true
+  }
+}
+
+module.exports.recuperarInfoUser = async (usr) => {
+  let resultado = await Usuarios.findAll({where: {usuario:usr.usuario, pass: usr.pass}})
+  if (resultado === null){
+    return false
+  }else {
+    return resultado[0]
+  }
+}

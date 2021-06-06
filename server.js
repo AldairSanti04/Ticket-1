@@ -3,7 +3,8 @@ const app = express();
 require('dotenv').config();
 const cors = require('cors');
 const sequelize = require('./db/conexion');
-const vistaPresupuestos = require('./app/views/presupuestos.view')
+const vistaPresupuestos = require('./app/views/presupuestos.view');
+const Usuarios = require('./app/models/usuarios.model');
 
 app.use(express.json());
 app.use(cors());
@@ -25,6 +26,16 @@ app.use((err, req, res, next)=> {
 //Iniciar el Servidor
 async function inicioServidor() {
     try {
+        await Usuarios.sync({alter:true});
+        await Usuarios.findOrCreate({
+            where: {
+                nombres: 'Aldair', 
+                apellidos: 'Santiago', 
+                email: 'aldair@admin.com', 
+                usuario: 'AldairSanti04', 
+                pass: 'holitas123', 
+            }
+        })
         await sequelize.authenticate();
         console.log('Conexion con la DB correcta!');
         app.listen(process.env.PORT, function (){

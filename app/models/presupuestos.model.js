@@ -1,24 +1,31 @@
-module.exports = class PresupuestoModel {
-    constructor(id, fecha, proyecto, version) {        
-        this.id = id;
-        this.fecha = fecha;
-        this.proyecto = proyecto;
-        this.version = version;
-    }
+const {DataTypes, Model} = require('sequelize')
+const sequelize = require('../../db/conexion')
 
-    //Crear Presupuesto
-    nuevoPresupuesto = async () => {
-    }
-    
-    //Mostrar todos lo Presupuestos
-    listarPresupuestos = async () => {
-    }
-    
-    //Modificar Presupuesto
-    modificarPresupuesto = async (id) => {        
-    }
+//Definir mi Modelo con que voy a trabajar
+const Presupuestos = sequelize.define('presupuestos', {
+    id : {
+      type: DataTypes.STRING(20),
+      primaryKey: true,
+      autoIncrement: false,
+    },
+    fecha : {
+        type: DataTypes.STRING(60),
+        allowNull: false,
+    },
+    proyecto: {
+        type: DataTypes.STRING(60),
+        allowNull: false,
+    },
+    version: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    estado: {
+      type: DataTypes.STRING(20),
+      allowNull: false
+    },
+  },{
+    timestamps: true
+})
 
-    //Eliminar Presupuesto
-    static eliminarPresupuesto = async (id) => {
-    }
-}
+module.exports = Presupuestos;
