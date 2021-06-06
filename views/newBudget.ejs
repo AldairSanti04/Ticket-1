@@ -1,0 +1,274 @@
+<%- include("includes/header") %>
+
+    <body>
+        <div class="container">
+            <form>
+                <div class="d-flex justify-content-between align-items-md-baseline mt-5">
+                    <div>
+                        <h2>Nuevo Presupuesto</h2>
+                    </div>
+                    <div class="p-auto">
+                        <label for="nameProyecto">Proyecto: </label>
+                        <input id="nameProyecto" type="text form-comtrol" required>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Resumen Financiero -->
+                <div class="form-control mt-5">
+                    <table class="text-center table table-responsive caption-top">
+                        <caption><h3>Resumen Financiero</h3></caption>
+                        <thead>
+                            <tr>
+                            <td scope="col">Ventas</td>
+                            <td scope="col">Costos</td>
+                            <td scope="col">Margen</td>
+                            <td scope="col">%</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td scope="row">
+                                <input class="form-control financiero-ventas" type="text" disabled>
+                            </td>
+                            <td>
+                                <input class="form-control financiero-costos" type="text" disabled>
+                            </td>
+                            <td>
+                                <input class="form-control financiero-margen" type="text" disabled>
+                            </td>
+                            <td>
+                                <input class="form-control financiero-porcentaje" type="text" disabled>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Flujo de Efectivo -->
+                <div class="form-control mt-5">
+                    <div style="overflow-x:auto;" >
+                        <table class="table-bordered text-center table table-responsive caption-top text-center" id="TableFlujo">
+                            <caption><h4>Flujo de Efectivo</h4></caption>
+                            <thead class="table-success">
+                            <tr>
+                                <td scope="col">/</td>
+                                <td scope="col">Total</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td scope="row">Ingresos</td>
+                                <td><input value="0" disabled type="number" class="form-control flujo-total-ingresos" step="any" min="0"></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Egresos</td>
+                                <td><input value="0" disabled type="number" class="form-control flujo-total-egresos" step="any" min="0"></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td scope="row">Total</td>
+                                    <td><input value="0" disabled type="number" class="form-control flujo-total-total" step="any" min="0"></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">Acumulado</td>
+                                    <td><input value="0" disabled type="number" class="form-control flujo-total-acumulado" step="any" min="0"></td>
+                                </tr>
+                    
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <a id="addColumn" class="btn btn-outline-success mx-2">Agregar Columna</a>
+                        <a id="delColumn" class="btn btn-outline-danger">Eliminar Columna</a>
+                    </div>
+                </div>
+                <!-- Estado de Resultados -->
+                <div style="overflow-x:auto;" class="form-control mt-5">
+                    <table class="table-bordered text-center table table-responsive caption-top" id="TableEstado">
+                        <caption><h4>Estado de Resultados</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">/</td>
+                            <td scope="col">Total</td>
+                            </tr>
+                        </thead>
+                        <tbody  id="TableB">
+                            <tr>
+                            <td scope="row">Ventas</td>
+                            <td><input value="0" disabled type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                            </tr>
+                            <tr>
+                            <td scope="row">Costos</td>
+                            <td><input value="0" disabled type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot id="TableC">
+                            <tr>
+                                <td scope="row">Margen</td>
+                                <td><input value="0" disabled type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Saldo Final</td>
+                                <td><input value="0" disabled type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                            </tr>
+                
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- Ingresos -->
+                <div style="overflow-x:auto;" class="form-control mt-5">
+                    <table class="table-bordered text-center table table-responsive caption-top" id="TableIngresos">
+                        <caption><h4>Ingresos</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">Titulos</td>
+                            <td scope="col">Total</td>
+                            <td scope="col">Eliminar</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td scope="row">Total</td>
+                                <td><input disabled value="0" type="number" class="form-control total-total-ingresos" step="any"></td>
+                                <td></td>
+                            </tr>
+                
+                        </tfoot>
+                    </table>
+                    <a class="btn btn-outline-success" id="agregarIngresos">Agregar Fila</a>
+                </div>
+                <!-- Costos Directos -->
+                <div style="overflow-x:auto;" class="form-control mt-5">
+                    <table class="table-bordered text-center table table-responsive caption-top" id="TableDirectos">
+                        <caption><h4>Costos Directos</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">Concepto</td>
+                            <td scope="col">Opciones</td>
+                            <td scope="col">Total</td>
+                            <td scope="col">Eliminar</td>
+                            </tr>
+                        </thead>
+                        <tbody  id="TableB">
+                        </tbody>
+                        <tfoot id="TableC">
+                            <tr>
+                                <td scope="row">Total</td>
+                                <td></td>
+                                <td><input disabled value="0" type="number" class="form-control total-total-ingresos" step="any"></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <a class="btn btn-outline-success" id="agregarDirectos">Agregar Fila</a>
+                </div>
+                <!-- Gastos Administrativos -->
+                <div style="overflow-x:auto;" class="form-control mt-5">
+                    <table class="table-bordered table text-center  table-responsive caption-top" id="TableAdministrativos">
+                        <caption><h4>Gastos Administrativos</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">Concepto</td>
+                            <td scope="col">Opciones</td>
+                            <td scope="col">Total</td>
+                            <td scope="col">Eliminar</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td scope="row">Total</td>
+                                <td></td>
+                                <td>TOTAL</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <a class="btn btn-outline-success" id="agregarAdmin">Agregar Fila</a>
+                </div>
+                <!-- Recursos -->
+                <div style="overflow-x:auto;" class="form-control mt-5">
+                    <table class="table-bordered text-center table table-responsive caption-top" id="TableAsignacion">
+                        <caption><h4>Recursos (% de Asisgnación)</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">Recurso</td>
+                            <td scope="col">Costo Mensual</td>
+                            <td scope="col">Total</td>
+                            <td scope="col">Eliminar</td>
+                            </tr>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td scope="row">Total</td>
+                                <td></td>
+                                <td>TOTAL</td>
+                                <td></td>
+                            </tr>
+                
+                        </tfoot>
+                    </table>
+                    <a class="btn btn-outline-success" id="agregarRecursos">Agregar Fila</a>
+                </div>
+                <!-- Costos -->
+                <div style="overflow-x:auto;" class="form-control mt-5">
+                    <table class="table-bordered text-center table table-responsive caption-top" id="TableCostos">
+                        <caption><h4>Costos</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">Recurso</td>
+                            <td scope="col">Total</td>
+                            </tr>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td scope="row">Total</td>
+                                <td>TOTAL</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- Resumen Costos -->
+                <div style="overflow-x:auto;" class="form-control mt-5 mb-5">
+                    <table class="table-bordered text-center table table-responsive caption-top" id="TableRCostos">
+                        <caption><h4>Resumen Costos Recursos</h4></caption>
+                        <thead class="table-success">
+                            <tr>
+                            <td scope="col">Recurso</td>
+                            <td scope="col">Total</td>
+                            </tr>
+                        </thead>
+                        <tbody >
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td scope="row">Total</td>
+                                <td>TOTAL</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-center mb-5">
+                    <a class="btn btn-outline-success mx-2">Guardar</a>
+                    <a class="btn btn-outline-danger" onclick="pruebita()">Cancelar</a>
+                </div>
+            </form>
+        </div>
+
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="src/js/newPresupuesto.js"></script>
+        <script src="src/js/app.js"></script>
+    </body>
+</html>

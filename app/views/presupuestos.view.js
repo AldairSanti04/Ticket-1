@@ -18,4 +18,12 @@ module.exports = async (app)=> {
             res.estatus(400).json('No se puede mostrar')
         }
     })
+
+    app.get('/index/nuevo', async (req,res)=>{
+        try{
+            res.render('newbudget');
+        }catch (err){
+            res.estatus(400).json('No se puede mostrar')
+        }
+    })
 }
