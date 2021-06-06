@@ -68,7 +68,6 @@ class Presupuesto{
             }
         }
 
-    // AGREGAR COLUMNAS
     addColEditYN(tableID, selector, mes) {
         var table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
@@ -156,6 +155,67 @@ class Presupuesto{
                 let newCell = row.insertCell(countCol-1);
                 newCell.innerHTML = `<input value="0" disabled class="form-control ${selector}" step="any">`
             }
+        }
+    }
+
+    //Funciones para eliminar las columnas
+    eliminarColumnas(){
+        if(numCols == 0){
+            Swal.fire({
+            icon: 'error',
+            title: 'No se puede realizar la acción',
+            text: 'No hay columnas que se puedan eliminar',
+            })
+        } else {
+            Swal.fire({
+            title: '¿Seguro que quiere eliminar la última columna?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    numCols--;
+                    this.eliminarCol('TableFlujo');
+                    this.eliminarCol('TableEstado');
+                    this.eliminarCol2('TableIngresos');
+                    this.eliminarCol2('TableDirectos');
+                    this.eliminarCol2('TableAdministrativos');
+                    this.eliminarCol2('TableAsignacion');
+                    this.eliminarCol('TableCostos');
+                    this.eliminarCol('TableRCostos');
+                    if(mesSelector == 0){
+                        mesSelector = 11;
+                    } else {
+                        mesSelector--;
+                    }
+                    if(numCols == 0){
+                        firstCol = true;
+                    }
+                }
+            })
+        }        
+    }
+        
+    eliminarCol(tableID){
+        var table = document.getElementById(tableID);
+        let countCol = document.getElementById(tableID).rows[0].cells.length
+        var rowCount = table.rows.length;
+        for(var i=0; i<rowCount; i++){   
+            var row = table.rows[i].cells[countCol-2];    
+            row.remove(countCol-1);
+        }
+    }
+        
+    eliminarCol2(tableID){
+        var table = document.getElementById(tableID);
+        let countCol = document.getElementById(tableID).rows[0].cells.length
+        var rowCount = table.rows.length;
+        for(var i=0; i<rowCount; i++){   
+            var row = table.rows[i].cells[countCol-3];    
+            row.remove(countCol-2);
         }
     }
 }
