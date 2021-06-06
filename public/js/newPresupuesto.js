@@ -238,7 +238,7 @@ class Presupuesto{
                             newCell.textContent = `${concepto}`
                         } else if(i === (countCol-1)){
                             var newCell  = newRow.insertCell(i);
-                            newCell.innerHTML = `<div class="text-center"><button class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></button></div>`
+                            newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
                         } else if(i === (countCol-2)){
                             var newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
@@ -273,7 +273,7 @@ class Presupuesto{
                             newCell.innerHTML = '<select class="form-select"><option>Opcion 1</option><option>Opcion 2</option><option>Opcion 3</option></select>'
                         } else if(i === (countCol-1)){
                             var newCell  = newRow.insertCell(i);
-                            newCell.innerHTML = `<div class="text-center"><button class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></button></div>`
+                            newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
                         } else if(i === (countCol-2)){
                             var newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
@@ -325,7 +325,7 @@ class Presupuesto{
                 newCell.textContent = `${rol}`
             } else if(i === (countCol-1)){
                 var newCell  = newRow.insertCell(i);
-                newCell.innerHTML = `<div class="text-center"><button class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></button></div>`
+                newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
             } else if(i === (countCol-2)){
                 var newCell  = newRow.insertCell(i);
                 newCell.innerHTML = `<input disabled value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
@@ -360,45 +360,58 @@ class Presupuesto{
     
     //Funciones para eliminar Filas
     eliminarFila(event){
-        Swal.fire({
-        title: '¿Seguro que quiere eliminar la fila seleccionada?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                event.preventDefault();
-                if(event.target.classList.contains('borrar-fila')){
-                    event.target.parentElement.parentElement.parentElement.remove();
-                } else if(event.target.parentElement.classList.contains('borrar-fila')) {
-                    event.target.parentElement.parentElement.parentElement.parentElement.remove();
-                }
-            }
-        })
+        event.preventDefault();
+        if(event.target.classList.contains('borrar-fila')){
+            Swal.fire({
+                title: '¿Seguro que quiere eliminar la fila seleccionada?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.parentElement.parentElement.parentElement.remove();
+                    }
+            })
+        } 
+        else if(event.target.parentElement.classList.contains('borrar-fila')) {
+            Swal.fire({
+                title: '¿Seguro que quiere eliminar la fila seleccionada?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.parentElement.parentElement.parentElement.parentElement.remove();
+                    }
+            })
+        }
     }
 
-    eliminarFilas(event){
-        Swal.fire({
-        title: '¿Seguro que quiere eliminar la fila seleccionada?',
-        text: 'Esta acción eliminara las filas de las siguientes 2 tablas',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                event.preventDefault();
-                if(event.target.classList.contains('borrar-fila')){
-                    event.target.parentElement.parentElement.parentElement.remove();
-                } else if(event.target.parentElement.classList.contains('borrar-fila')) {
-                    event.target.parentElement.parentElement.parentElement.parentElement.remove();
-                }
-            }
-        })
-    }
+    // eliminarFilas(event){
+    //     Swal.fire({
+    //     title: '¿Seguro que quiere eliminar la fila seleccionada?',
+    //     text: 'Esta acción eliminara las filas de las siguientes 2 tablas',
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Si',
+    //     cancelButtonText: 'No'
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             event.preventDefault();
+    //             if(event.target.classList.contains('borrar-fila')){
+    //                 event.target.parentElement.parentElement.parentElement.remove();
+    //             } else if(event.target.parentElement.classList.contains('borrar-fila')) {
+    //                 event.target.parentElement.parentElement.parentElement.parentElement.remove();
+    //             }
+    //         }
+    //     })
+    // }
 }
