@@ -335,7 +335,7 @@ class Presupuesto{
             } else {
                 var newCell  = newRow.insertCell(i);
                 //Cambiar a Porcentaje
-                newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
+                newCell.innerHTML = `<input value="1" type="number" class="form-control ${selector}" min="1" max="100" step="1">`
             }
         }
     }

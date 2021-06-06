@@ -9,7 +9,7 @@
                     </div>
                     <div class="p-auto">
                         <label for="nameProyecto">Proyecto: </label>
-                        <input id="nameProyecto" type="text form-comtrol" required>
+                        <input id="nameProyecto" type="text" class="form-comtrol" required>
                     </div>
                 </div>
 
@@ -94,24 +94,24 @@
                             <td scope="col">Total</td>
                             </tr>
                         </thead>
-                        <tbody  id="TableB">
+                        <tbody>
                             <tr>
                             <td scope="row">Ventas</td>
-                            <td><input value="0" readonly type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                            <td><input value="0" readonly type="number" class="form-control total-ventas" step="any" min="0"></td>
                             </tr>
                             <tr>
                             <td scope="row">Costos</td>
-                            <td><input value="0" readonly type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                            <td><input value="0" readonly type="number" class="form-control total-costos" step="any" min="0"></td>
                             </tr>
                         </tbody>
-                        <tfoot id="TableC">
+                        <tfoot>
                             <tr>
                                 <td scope="row">Margen</td>
-                                <td><input value="0" readonly type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                                <td><input value="0" readonly type="number" class="form-control total-margen" step="any" min="0"></td>
                             </tr>
                             <tr>
                                 <td scope="row">Saldo Final</td>
-                                <td><input value="0" readonly type="number" class="form-control input-estado-total-fila" step="any" min="0"></td>
+                                <td><input value="0" readonly type="number" class="form-control total-saldo-final step="any" min="0"></td>
                             </tr>
                 
                         </tfoot>
@@ -159,7 +159,7 @@
                             <tr>
                                 <td scope="row">Total</td>
                                 <td></td>
-                                <td><input readonly value="0" type="number" class="form-control total-total-ingresos" step="any"></td>
+                                <td><input readonly value="0" type="number" class="form-control total-total-directos" step="any"></td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -184,7 +184,7 @@
                             <tr>
                                 <td scope="row">Total</td>
                                 <td></td>
-                                <td>TOTAL</td>
+                                <td><input readonly value="0" type="number" class="form-control total-total-admon" step="any"></td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -209,7 +209,7 @@
                             <tr>
                                 <td scope="row">Total</td>
                                 <td></td>
-                                <td>TOTAL</td>
+                                <td><input readonly value="0" type="number" class="form-control total-total-recursos" step="any"></td>
                                 <td></td>
                             </tr>
                 
@@ -232,7 +232,7 @@
                         <tfoot>
                             <tr>
                                 <td scope="row">Total</td>
-                                <td>TOTAL</td>
+                                <td><input readonly value="0" type="number" class="form-control total-total-costos-r" step="any"></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -252,7 +252,7 @@
                         <tfoot>
                             <tr>
                                 <td scope="row">Total</td>
-                                <td>TOTAL</td>
+                                <td><input readonly value="0" type="number" class="form-control total-total-resumen" step="any"></td>
                             </tr>
                         </tfoot>
                     </table>
