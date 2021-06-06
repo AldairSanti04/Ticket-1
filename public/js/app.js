@@ -16,7 +16,7 @@ function cargarEventos() {
     tablaFlujo.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
     tablaCostosDirectos.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
     tablaAdministrativos.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
-    //tablaRecursos.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
+    tablaRecursos.addEventListener('click', (e) => { presupuesto.eliminarFilasRecursos(e) });
     btnAgregarC.addEventListener('click', (e) => { presupuesto.agregarColumnas() });
     btnEliminarC.addEventListener('click', (e) => { presupuesto.eliminarColumnas() });
     btnIngresos.addEventListener('click', (e) => { presupuesto.agregarFila('TableIngresos', 'input-ingresos') });

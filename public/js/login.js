@@ -4,8 +4,8 @@ let pass = document.getElementById('password');
 
 class Usuarios {
     constructor(user, pass){
-        this.user = user,
-        this.pass = pass,
+        this.user = "",
+        this.pass = "",
         this.id = "",
         this.nombre = "",
         this.email = "",
@@ -25,7 +25,7 @@ class Usuarios {
 //Manda el post
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    Usuarios.guardaUsuario(new Usuarios(user.value, pass.value));
+    Usuarios.guardaUsuario(new Usuarios());
     let resultado = await fetch("http://localhost:3000/login", { 
         method: 'post',
         headers: {
@@ -46,6 +46,8 @@ form.addEventListener('submit', async (event) => {
     } else {
         let data = await Usuarios.recuperaUsuario();
         data.tipo = vuelta.user.tipo_usuario;
+        data.user = vuelta.user.usuario;
+        data.pass = vuelta.user.pass;
         data.id = vuelta.user.id;
         data.email = vuelta.user.email;
         data.nombre = vuelta.user.nombres + " " + vuelta.user.apellidos;

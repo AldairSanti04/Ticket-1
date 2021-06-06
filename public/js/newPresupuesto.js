@@ -69,11 +69,11 @@ class Presupuesto{
         }
 
     addColEditYN(tableID, selector, mes) {
-        var table = document.getElementById(tableID);
+        let table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
-        var rowCount = table.rows.length;
-        for(var i=0; i<rowCount; i++){   
-            var row = table.rows[i];         
+        let rowCount = table.rows.length;
+        for(let i=0; i<rowCount; i++){   
+            let row = table.rows[i];         
             if(i === 0){
                 let newCell = row.insertCell(countCol-1);
                 newCell.textContent = `${mes}`
@@ -94,11 +94,11 @@ class Presupuesto{
     }
     
     addColNoEdit(tableID, selector, mes) {
-        var table = document.getElementById(tableID);
+        let table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
-        var rowCount = table.rows.length;
-        for(var i=0; i<rowCount; i++){   
-            var row = table.rows[i];         
+        let rowCount = table.rows.length;
+        for(let i=0; i<rowCount; i++){   
+            let row = table.rows[i];         
             if(i === 0){
                 let newCell = row.insertCell(countCol-1);
                 newCell.textContent = `${mes}`
@@ -119,11 +119,11 @@ class Presupuesto{
     }
 
     addColEditExtra(tableID, selector, mes) {
-        var table = document.getElementById(tableID);
+        let table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
-        var rowCount = table.rows.length;
-        for(var i=0; i<rowCount; i++){   
-            var row = table.rows[i];         
+        let rowCount = table.rows.length;
+        for(let i=0; i<rowCount; i++){   
+            let row = table.rows[i];         
             if(i === 0){
                 let newCell = row.insertCell(countCol-2);
                 newCell.textContent = `${mes}`
@@ -139,11 +139,11 @@ class Presupuesto{
     }
     
     addColNoEditV2(tableID, selector, mes) {
-        var table = document.getElementById(tableID);
+        let table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
-        var rowCount = table.rows.length;
-        for(var i=0; i<rowCount; i++){   
-            var row = table.rows[i];         
+        let rowCount = table.rows.length;
+        for(let i=0; i<rowCount; i++){   
+            let row = table.rows[i];         
             if(i === 0){
                 let newCell = row.insertCell(countCol-1);
                 newCell.textContent = `${mes}`
@@ -200,21 +200,21 @@ class Presupuesto{
     }
         
     eliminarCol(tableID){
-        var table = document.getElementById(tableID);
+        let table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
-        var rowCount = table.rows.length;
-        for(var i=0; i<rowCount; i++){   
-            var row = table.rows[i].cells[countCol-2];    
+        let rowCount = table.rows.length;
+        for(let i=0; i<rowCount; i++){   
+            let row = table.rows[i].cells[countCol-2];    
             row.remove(countCol-1);
         }
     }
         
     eliminarCol2(tableID){
-        var table = document.getElementById(tableID);
+        let table = document.getElementById(tableID);
         let countCol = document.getElementById(tableID).rows[0].cells.length
-        var rowCount = table.rows.length;
-        for(var i=0; i<rowCount; i++){   
-            var row = table.rows[i].cells[countCol-3];    
+        let rowCount = table.rows.length;
+        for(let i=0; i<rowCount; i++){   
+            let row = table.rows[i].cells[countCol-3];    
             row.remove(countCol-2);
         }
     }
@@ -229,21 +229,21 @@ class Presupuesto{
                 if (!concepto) {
                     return 'Se requiere ingresar el nombre del Concepto'
                 } else {
-                    var tableRef = document.getElementById(tableID);
-                    var newRow   = tableRef.insertRow(1);
+                    let tableRef = document.getElementById(tableID);
+                    let newRow   = tableRef.insertRow(1);
                     let countCol = document.getElementById(tableID).rows[0].cells.length
                     for(let i = 0; i < countCol; i++){
                         if(i === 0){
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.textContent = `${concepto}`
                         } else if(i === (countCol-1)){
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
                         } else if(i === (countCol-2)){
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
                         } else {
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
                         }
                     }
@@ -261,24 +261,24 @@ class Presupuesto{
                 if (!concepto) {
                     return 'Se requiere ingresar el nombre del Concepto'
                 } else {
-                    var tableRef = document.getElementById(tableID);
-                    var newRow   = tableRef.insertRow(1);
+                    let tableRef = document.getElementById(tableID);
+                    let newRow   = tableRef.insertRow(1);
                     let countCol = document.getElementById(tableID).rows[0].cells.length
                     for(let i = 0; i < countCol; i++) {
                         if(i === 0){
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.textContent = `${concepto}`
                         } else if(i == 1) {
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = '<select class="form-select"><option>Opcion 1</option><option>Opcion 2</option><option>Opcion 3</option></select>'
                         } else if(i === (countCol-1)){
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
                         } else if(i === (countCol-2)){
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
                         } else {
-                            var newCell  = newRow.insertCell(i);
+                            let newCell  = newRow.insertCell(i);
                             newCell.innerHTML = `<input value="0" type="number" class="form-control ${selector}" step="any">`
                         }
                     }
@@ -316,24 +316,24 @@ class Presupuesto{
     }
 
     addRowRecursos(tableID, selector, rol, costo) {
-        var tableRef = document.getElementById(tableID);
-        var newRow   = tableRef.insertRow(1);
+        let tableRef = document.getElementById(tableID);
+        let newRow   = tableRef.insertRow(1);
         let countCol = document.getElementById(tableID).rows[0].cells.length
         for(let i = 0; i < countCol; i++){
             if(i === 0){
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.textContent = `${rol}`
             } else if(i === (countCol-1)){
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.innerHTML = `<div class="text-center"><a class="borrar-fila btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a></div>`
             } else if(i === (countCol-2)){
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
             } else if(i === 1){
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.innerHTML = `<input readonly value="${costo}" type="number" class="form-control ${selector}-costo-mensual" step="any">`
             } else {
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 //Cambiar a Porcentaje
                 newCell.innerHTML = `<input value="1" type="number" class="form-control ${selector}" min="1" max="100" step="1">`
             }
@@ -341,18 +341,18 @@ class Presupuesto{
     }
         
     addRowHijosRecursos(tableID, selector, rol) {
-        var tableRef = document.getElementById(tableID);
-        var newRow   = tableRef.insertRow(1);
+        let tableRef = document.getElementById(tableID);
+        let newRow   = tableRef.insertRow(1);
         let countCol = document.getElementById(tableID).rows[0].cells.length
         for(let i = 0; i < countCol; i++){
             if(i === 0){
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.textContent = `${rol}`
             } else if(i === (countCol-1)){
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.innerHTML = `<input readonly value="0" type="number" class="form-control ${selector}-total-concepto" step="any">`
             } else {
-                var newCell  = newRow.insertCell(i);
+                let newCell  = newRow.insertCell(i);
                 newCell.innerHTML = `<input value="0" readonly type="number" class="form-control ${selector}" step="any">`
             }
         }
@@ -393,25 +393,53 @@ class Presupuesto{
         }
     }
 
-    // eliminarFilas(event){
-    //     Swal.fire({
-    //     title: '¿Seguro que quiere eliminar la fila seleccionada?',
-    //     text: 'Esta acción eliminara las filas de las siguientes 2 tablas',
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Si',
-    //     cancelButtonText: 'No'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             event.preventDefault();
-    //             if(event.target.classList.contains('borrar-fila')){
-    //                 event.target.parentElement.parentElement.parentElement.remove();
-    //             } else if(event.target.parentElement.classList.contains('borrar-fila')) {
-    //                 event.target.parentElement.parentElement.parentElement.parentElement.remove();
-    //             }
-    //         }
-    //     })
-    // }
+    eliminarFilasRecursos(event){
+        event.preventDefault();
+        if(event.target.classList.contains('borrar-fila')){
+            Swal.fire({
+                title: '¿Seguro que quiere eliminar la fila seleccionada?',
+                text: 'Esta acción eliminara las filas de las siguientes 2 tablas',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let td = event.target.parentElement.parentElement; 
+                        let tr = td.parentNode;
+                        let index = Array.from(tr.parentNode.children).indexOf(tr);
+                        let tableCostos = document.getElementById("TableCostos");
+                        tableCostos.deleteRow(index+1)
+                        let tableRCostos = document.getElementById("TableRCostos");
+                        tableRCostos.deleteRow(index+1)
+                        event.target.parentElement.parentElement.parentElement.remove();
+                    }
+            })
+        } 
+        else if(event.target.parentElement.classList.contains('borrar-fila')) {
+            Swal.fire({
+                title: '¿Seguro que quiere eliminar la fila seleccionada?',
+                text: 'Esta acción eliminara las filas de las siguientes 2 tablas',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let td = event.target.parentElement.parentElement.parentElement; 
+                        let tr = td.parentNode;
+                        let index = Array.from(tr.parentNode.children).indexOf(tr);
+                        let tableCostos = document.getElementById("TableCostos");
+                        tableCostos.deleteRow(index+1)
+                        let tableRCostos = document.getElementById("TableRCostos");
+                        tableRCostos.deleteRow(index+1)
+                        event.target.parentElement.parentElement.parentElement.parentElement.remove();
+                    }
+            })
+        }
+    }
 }

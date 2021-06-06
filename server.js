@@ -27,15 +27,15 @@ app.use((err, req, res, next)=> {
 async function inicioServidor() {
     try {
         await Usuarios.sync({alter:true});
-        await Usuarios.findOrCreate({
-            where: {
-                nombres: 'Aldair', 
-                apellidos: 'Santiago', 
-                email: 'aldair@admin.com', 
-                usuario: 'AldairSanti04', 
-                pass: 'holitas123', 
-            }
-        })
+        // await Usuarios.findOrCreate({
+        //     where: {
+        //         nombres: 'Aldair', 
+        //         apellidos: 'Santiago', 
+        //         email: 'aldair@admin.com', 
+        //         usuario: 'aldairsanti04', 
+        //         pass: 'holitas123', 
+        //     }
+        // })
         await sequelize.authenticate();
         console.log('Conexion con la DB correcta!');
         app.listen(process.env.PORT, function (){
