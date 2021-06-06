@@ -1,5 +1,3 @@
-const User = require('../db/users');
-
 module.exports = class PresupuestoModel {
     constructor(id, fecha, proyecto, version) {        
         this.id = id;
