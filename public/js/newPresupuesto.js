@@ -5,6 +5,23 @@ let firstCol = true;
 let numCols = 0;
 
 class Presupuesto{
+    constructor(){
+        this.id = '',
+        this.fecha = '',
+        this.proyecto = '',
+        this.version = 1,
+        this.estado = 'Activo',
+        this.autor = ''
+    }
+
+    static async guardaPresupuesto (usuario) {
+        localStorage.setItem("dataPresupuesto", JSON.stringify(usuario))
+    }
+
+    static async recuperaPresupuesto () {
+        let resultado = await JSON.parse(localStorage.getItem('dataUsuario'))
+        return resultado
+    }
 
     //Funciones para Agregar Columnas a todas las Tablas
     agregarColumnas() {
@@ -27,18 +44,18 @@ class Presupuesto{
                 11: 'Diciembre',
             },
             showCancelButton: true,
-                inputValidator: (value) => {
-                    mesSelector = value;
-                    this.addColEditYN('TableFlujo', 'input-flujo', mes[value]);
-                    this.addColNoEdit('TableEstado', 'input-estado', mes[value]);
-                    this.addColEditExtra('TableIngresos', 'input-ingresos', mes[value]);
-                    this.addColEditExtra('TableDirectos', 'input-directos', mes[value]);
-                    this.addColEditExtra('TableAdministrativos', 'input-admon', mes[value]);
-                    this.addColEditExtra('TableAsignacion', 'input-asignacion', mes[value]);
-                    this.addColNoEditV2('TableCostos', 'input-costos', mes[value]);
-                    this.addColNoEditV2('TableRCostos', 'input-resumen', mes[value]);
-                    firstCol = false;
-                    numCols++
+            inputValidator: (value) => {
+                mesSelector = value;
+                this.addColEditYN('TableFlujo', 'input-flujo', mes[value]);
+                this.addColNoEdit('TableEstado', 'input-estado', mes[value]);
+                this.addColEditExtra('TableIngresos', 'input-ingresos', mes[value]);
+                this.addColEditExtra('TableDirectos', 'input-directos', mes[value]);
+                this.addColEditExtra('TableAdministrativos', 'input-admon', mes[value]);
+                this.addColEditExtra('TableAsignacion', 'input-asignacion', mes[value]);
+                this.addColNoEditV2('TableCostos', 'input-costos', mes[value]);
+                this.addColNoEditV2('TableRCostos', 'input-resumen', mes[value]);
+                firstCol = false;
+                numCols++
                 }
             })
         } else {
@@ -64,9 +81,9 @@ class Presupuesto{
                 this.addColNoEditV2('TableCostos', 'input-costos', mes[mesSelector]);
                 this.addColNoEditV2('TableRCostos', 'input-resumen', mes[mesSelector]);
                 numCols++
-                }
             }
         }
+    }
 
     addColEditYN(tableID, selector, mes) {
         let table = document.getElementById(tableID);
@@ -411,9 +428,9 @@ class Presupuesto{
                         let tr = td.parentNode;
                         let index = Array.from(tr.parentNode.children).indexOf(tr);
                         let tableCostos = document.getElementById("TableCostos");
-                        tableCostos.deleteRow(index+1)
+                        tableCostos.deleteRow(index)
                         let tableRCostos = document.getElementById("TableRCostos");
-                        tableRCostos.deleteRow(index+1)
+                        tableRCostos.deleteRow(index)
                         event.target.parentElement.parentElement.parentElement.remove();
                     }
             })
@@ -434,9 +451,9 @@ class Presupuesto{
                         let tr = td.parentNode;
                         let index = Array.from(tr.parentNode.children).indexOf(tr);
                         let tableCostos = document.getElementById("TableCostos");
-                        tableCostos.deleteRow(index+1)
+                        tableCostos.deleteRow(index)
                         let tableRCostos = document.getElementById("TableRCostos");
-                        tableRCostos.deleteRow(index+1)
+                        tableRCostos.deleteRow(index)
                         event.target.parentElement.parentElement.parentElement.parentElement.remove();
                     }
             })

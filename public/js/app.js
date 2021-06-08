@@ -1,5 +1,6 @@
 const presupuesto = new Presupuesto();
-const tablaFlujo = document.getElementById('TableIngresos');
+const tableFlujo = document.getElementById('TableFlujo')
+const tablaIngresos = document.getElementById('TableIngresos');
 const tablaCostosDirectos = document.getElementById('TableDirectos');
 const tablaAdministrativos = document.getElementById('TableAdministrativos');
 const tablaRecursos = document.getElementById('TableAsignacion');
@@ -11,9 +12,10 @@ const btnAdmin = document.getElementById('agregarAdmin');
 const btnRecursos = document.getElementById('agregarRecursos');
 
 cargarEventos();
+pruebita();
 
 function cargarEventos() {
-    tablaFlujo.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
+    tablaIngresos.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
     tablaCostosDirectos.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
     tablaAdministrativos.addEventListener('click', (e) => { presupuesto.eliminarFila(e) });
     tablaRecursos.addEventListener('click', (e) => { presupuesto.eliminarFilasRecursos(e) });
@@ -23,4 +25,12 @@ function cargarEventos() {
     btnDirectos.addEventListener('click', (e) => { presupuesto.addRowExtra('TableDirectos', 'input-directos') });
     btnAdmin.addEventListener('click', (e) => { presupuesto.addRowExtra('TableAdministrativos', 'input-admon') });
     btnRecursos.addEventListener('click', (e) => { presupuesto.addRows() });
+}
+
+function pruebita() {
+    let tr = tableFlujo.children[1];
+    console.log(tr);
+    let index = Array.from(tr.children);
+    index.shift()
+    console.log(index);
 }

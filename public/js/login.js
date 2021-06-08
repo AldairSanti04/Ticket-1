@@ -3,7 +3,7 @@ let user = document.getElementById('user');
 let pass = document.getElementById('password');
 
 class Usuarios {
-    constructor(user, pass){
+    constructor(){
         this.user = "",
         this.pass = "",
         this.id = "",
@@ -45,7 +45,6 @@ form.addEventListener('submit', async (event) => {
           });
     } else {
         let data = await Usuarios.recuperaUsuario();
-        data.tipo = vuelta.user.tipo_usuario;
         data.user = vuelta.user.usuario;
         data.pass = vuelta.user.pass;
         data.id = vuelta.user.id;
