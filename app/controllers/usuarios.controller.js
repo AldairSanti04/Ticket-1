@@ -37,7 +37,7 @@ module.exports.registroNuevoUsuario = async (user) => {
     const { nombres, apellidos, usuario, email, pass  } = user;
     let nuevoUsuario = new ModelUsers(nombres, apellidos, usuario, email, pass); 
     try {
-        let resultado = await nuevoUsuario.registrarUsuario();
+        let resultado = await nuevoUsuario.registrarNuevoUsuario();
         if(resultado){
             let result =  await nuevoUsuario.usuarioAutenticado();
             return result;
@@ -49,17 +49,34 @@ module.exports.registroNuevoUsuario = async (user) => {
     }  
 }
 
-module.exports.datosUsuario = async (usr) => {
-    let usrchk = usr
+//Seleccionar un solo usuario por ID
+module.exports.buscarUsuario = async (data)=>{
     try {
-        let resultado =  await ModelUsers.recuperarInfoUser(usrchk)
-        if (resultado) {
-            return resultado
-        }else {
-            throw new Error ('No hay datos de Usuario')
-        }
-    }catch (err){
-        console.log(err)
-        throw new Error (' no semuy bien que paso')
+        let resultado = await ModelUsers.infoUsuario(data);
+        let result = resultado.dataValues;
+        return result;
+    }catch (err) {
+        throw new Error ('Ocurrio un problema en el controlador al BUSCAR usuario')
     }
 }
+
+module.exports.updateUsuario = async (id, user) => {
+    const {nombres, apellidos, usuario, email, pass} = user;
+    let usuarioActualizar = new ModelUsers(nombres, apellidos, usuario, email, pass);
+    try {
+        let resultado =  await usuarioActualizar.actualizarUsuario(id);
+        let result = resultado.dataValues;
+        return result;
+    }catch (err){
+        throw new Error ('No existe el usuario actualizar');
+    }
+}
+
+module.exports.eliminarUsuario = async (id) => {
+    try {
+        let result = await ModelUsers.deleteUser(id)
+        return true;
+    }catch (err){
+        throw new Error ('No se pudo eliminar el usuario seleccionado')
+    }
+};

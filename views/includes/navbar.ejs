@@ -3,7 +3,7 @@
         <div class="container">
             <a class="navbar-brand" href="/index"><i class='bx bx-paste'></i><span class="mx-3 text-bold">Ticket-1</span></a>
             <div>
-                <a href="#"><span id="UserName" class="mx-4 text-bold">User Name</span></a>
+                <a id="userlink"><span id="UserName" class="mx-4 text-bold">User Name</span></a>
                 <button onclick="cerrarSesion()" class="btn btn-outline-light">Cerrar Sesión</button>
             </div>
         </div>
@@ -16,9 +16,11 @@
 
         function sesionIniciada(){
             const usuario = document.getElementById("UserName");
+            const linkuser = document.getElementById("userlink");
             usuario.innerHTML ="";
             let resultado = JSON.parse(localStorage.getItem('dataUsuario'));
             usuario.innerHTML = `${resultado.user}`;
+            linkuser.setAttribute("href", `/usuario/${resultado.id}`);
         }
 
         function cerrarSesion(){
