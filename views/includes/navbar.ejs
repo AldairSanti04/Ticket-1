@@ -1,0 +1,32 @@
+<header>     
+    <nav class="navbar navbar-expand-lg navbar-dark navegacion-color mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/index"><i class='bx bx-paste'></i><span class="mx-3 text-bold">Ticket-1</span></a>
+            <div>
+                <a href="#"><span id="UserName" class="mx-4 text-bold">User Name</span></a>
+                <button onclick="cerrarSesion()" class="btn btn-outline-light">Cerrar Sesión</button>
+            </div>
+        </div>
+    </nav>
+    <script>
+        let loggeado = localStorage.getItem('dataUsuario')
+        if(loggeado != null){
+            sesionIniciada();
+        }
+
+        function sesionIniciada(){
+            const usuario = document.getElementById("UserName");
+            usuario.innerHTML ="";
+            let resultado = JSON.parse(localStorage.getItem('dataUsuario'));
+            usuario.innerHTML = `${resultado.user}`;
+        }
+
+        function cerrarSesion(){
+            localStorage.removeItem('dataUsuario');
+            setTimeout(() => {
+            window.location = '/login'
+        }, 1500);
+        }
+
+    </script>
+</header>

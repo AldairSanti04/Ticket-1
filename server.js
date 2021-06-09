@@ -4,7 +4,8 @@ require('dotenv').config();
 const cors = require('cors');
 const sequelize = require('./db/conexion');
 const vistaPresupuestos = require('./app/views/presupuestos.view');
-const Usuarios = require('./app/models/usuarios.model');
+const vistaUsuarios = require('./app/views/usuarios.view')
+const Usuarios = require('./db/db.usuarios');
 
 app.use(express.json());
 app.use(cors());
@@ -49,3 +50,4 @@ async function inicioServidor() {
 inicioServidor();
 
 vistaPresupuestos(app);
+vistaUsuarios(app);

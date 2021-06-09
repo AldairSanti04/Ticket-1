@@ -1,4 +1,4 @@
-const Usuarios = require('../models/usuarios.model');
+const ModelUsers = require('../models/usuarios.model');
 const sequelize = require('../../db/conexion');
 const jwt = require('jsonwebtoken');
 
@@ -17,25 +17,42 @@ module.exports.generaToken = async (data)=>{
     }
 }
 
-module.exports.chequearUsuario = async (usr)=>{
-    let usrchk = usr
+module.exports.chequearUsuario = async (user)=>{
+    const {email, pass} = user;
+    let usuario = new ModelUsers('', '', '', email, pass);
     try {
-        let resultado =  await Usuarios.existenciaDeUsuario(usrchk)
+        let resultado =  await usuario.existenciaDeUsuario();
         if (resultado) {
-            let result =  await Usuarios.usuarioAutenticado(usrchk)
+            let result =  await usuario.usuarioAutenticado();
             return result
         }else {
-            throw new Error ('Contraseña Incorrecta')
+            throw new Error ('Contraseña Incorrecta');
         }
     }catch (err){
-        throw new Error ('No existe el usuario')
+        throw new Error ('No existe el usuario');
     }
+}
+
+module.exports.registroNuevoUsuario = async (user) => {
+    const { nombres, apellidos, usuario, email, pass  } = user;
+    let nuevoUsuario = new ModelUsers(nombres, apellidos, usuario, email, pass); 
+    try {
+        let resultado = await nuevoUsuario.registrarUsuario();
+        if(resultado){
+            let result =  await nuevoUsuario.usuarioAutenticado();
+            return result;
+        } else {
+            throw new Error ('No se pudo crear el usuario');
+        }
+    } catch (error) {
+        throw error;
+    }  
 }
 
 module.exports.datosUsuario = async (usr) => {
     let usrchk = usr
     try {
-        let resultado =  await Usuarios.recuperarInfoUser(usrchk)
+        let resultado =  await ModelUsers.recuperarInfoUser(usrchk)
         if (resultado) {
             return resultado
         }else {

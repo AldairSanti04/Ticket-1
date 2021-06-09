@@ -1,4 +1,7 @@
 let form = document.getElementById('formLogin');
+let nombres = document.getElementById('nombres');
+let apellidos = document.getElementById('apellidos');
+let usuario = document.getElementById('usuario');
 let email = document.getElementById('email');
 let pass = document.getElementById('password');
 
@@ -25,13 +28,16 @@ class Usuarios {
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     Usuarios.guardaUsuario(new Usuarios());
-    let resultado = await fetch("http://localhost:3000/login", { 
+    let resultado = await fetch("http://localhost:3000/signup", { 
         method: 'post',
         headers: {
             "Accept": "application/json, text/plain, *,*",
             "Content-Type": "application/json"
         },
         body: JSON.stringify( {
+            "nombres": nombres.value,
+            "apellidos": apellidos.value,
+            "usuario": usuario.value,
             "email": email.value,
             "pass": pass.value
         })

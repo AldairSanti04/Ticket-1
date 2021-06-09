@@ -24,6 +24,14 @@ const Presupuestos = sequelize.define('presupuestos', {
       type: DataTypes.STRING(20),
       allowNull: false
     },
+    mes: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    año: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   },{
     timestamps: true
 })
