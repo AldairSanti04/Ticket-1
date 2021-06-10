@@ -18,7 +18,7 @@ class Usuarios {
     }
 
     static async recuperaUsuario () {
-        let resultado = await JSON.parse(localStorage.getItem('dataUsuario'))
+        let resultado = await JSON.parse(localStorage.getItem('dataUsuario'));
         return resultado
     }
 }
@@ -29,36 +29,60 @@ form.addEventListener('submit', async (event) => {
     let info = await Usuarios.recuperaUsuario();
     let id = info.id;
     let email = info.email;
-    let resultado = await fetch("http://localhost:3000/usuario/" + id, { 
-        method: 'post',
-        headers: {
-            "Accept": "application/json, text/plain, *,*",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify( {
-            "nombres": nombres.value,
-            "apellidos": apellidos.value,
-            "usuario": usuario.value,
-            "email": email,
-            "pass": pass.value
+    Swal.fire({
+        title: '¿Seguro que quiere guardar los cambios?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                let resultado = await fetch("http://localhost:3000/usuario/" + id, { 
+                    method: 'post',
+                    headers: {
+                        "Accept": "application/json, text/plain, *,*",
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${info.token}`
+                    },
+                    body: JSON.stringify( {
+                        "nombres": nombres.value,
+                        "apellidos": apellidos.value,
+                        "usuario": usuario.value,
+                        "email": email,
+                        "pass": pass.value
+                    })
+                })
+                let vuelta = await resultado.json();
+                if(vuelta.hasOwnProperty('error')){
+                    Swal.fire({
+                        title: `${vuelta.error}`,
+                        icon: "error",
+                      });
+                } else {
+                    Swal.fire({
+                        title: "Usuario Actualizado Correctamente",
+                        icon: "success",
+                    });
+                    let data = await Usuarios.recuperaUsuario();
+                    data.user = vuelta.user.usuario;
+                    data.id = vuelta.user.id;
+                    data.email = vuelta.user.email;
+                    data.nombre = vuelta.user.nombres + " " + vuelta.user.apellidos;
+                    Usuarios.guardaUsuario(data);
+                    setTimeout(() => {
+                    window.location = '/index'
+                    }, 2000);
+                }
+            } else {
+                Swal.fire({
+                    title: "Datos no actualizados",
+                    icon: "success",
+                  });
+            }
         })
-    })
-    let vuelta = await resultado.json();
-    if(vuelta.error){
-        Swal.fire({
-            title: `${vuelta.error}`,
-            icon: "error",
-          });
-    } else {
-        let data = await Usuarios.recuperaUsuario();
-        data.user = vuelta.user.usuario;
-        data.id = vuelta.user.id;
-        data.email = vuelta.user.email;
-        data.nombre = vuelta.user.nombres + " " + vuelta.user.apellidos;
-        data.token = vuelta.token;
-        Usuarios.guardaUsuario(data);
-            location.href = '/index'
-    }
+
 })
 
 function cancelUpdate() {
@@ -78,7 +102,7 @@ function cancelUpdate() {
         })
 }
 
-function eliminar(id) {
+async function eliminar(id) {
     Swal.fire({
         title: '¿Seguro que quiere eliminar su cuenta?',
         text: 'Esta acción no se puede cambiar',
@@ -88,24 +112,27 @@ function eliminar(id) {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si',
         cancelButtonText: 'No'
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    let resultado = fetch("http://localhost:3000/delete/" + id, {
+                    let info = await Usuarios.recuperaUsuario();
+                    let resultado = await fetch("http://localhost:3000/delete/" + id, {
                     method: 'get',
                     headers: {
                         "Accept": "application/json, text/plain, *,*",
                         "Content-Type": "application/json",
+                        'Authorization': `Bearer ${info.token}`
                     }
                     })
-                    if(resultado.status == 400){
+                    let vuelta = await resultado.json();
+                    if(vuelta.hasOwnProperty('error')){
                         Swal.fire({
-                            title: "No tienes permiso para eliminar usuarios" ,
+                            title: "No tienes permiso para eliminar la cuenta" ,
                             icon: "error",
                           });
                     } else {
                         Swal.fire({
-                            title: "Usuario Eliminado Correctamente",
+                            title: "Cuenta Eliminada Correctamente",
                             icon: "success",
                         });
                         localStorage.removeItem('dataUsuario');
@@ -116,13 +143,13 @@ function eliminar(id) {
         
                 } catch (error) {
                     Swal.fire({
-                        title: "No tienes permiso para eliminar usuarios",
+                        title: "No tienes permiso para eliminar la cuenta",
                         icon: "error",
                       });
                 }
             } else {
                 Swal.fire({
-                    title: "Usuario no eliminado",
+                    title: "Cuenta no eliminada",
                     icon: "success",
                   });
             }

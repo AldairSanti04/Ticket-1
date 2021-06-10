@@ -12,9 +12,9 @@ module.exports.verificacionUsuario = async (req,res,next)=>{
                 throw new Error ('Token no valido')  
             }
         } catch (error) {
-            res.status(400).json({error: error.message})
+            res.status(400).json({error: 'No tienes permisos, necesitas un Token'})
         }
     }else {
-        res.status(400).json('Este sistema es privado y seguro, necesita un Token para ingresar')
+        res.status(400).json({error: 'Este sistema es privado y seguro, necesita un Token para ingresar'})
     }
 }

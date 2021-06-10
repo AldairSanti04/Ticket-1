@@ -1,5 +1,7 @@
 const sequelize = require('../../db/conexion');
 const controladorUsuarios = require('../controllers/usuarios.controller');
+const middValidacion = require('../../middleware/middVerificacionDatos');
+const middAuth = require('../../middleware/middVerificacion');
 
 module.exports = async (app)=> {
     
@@ -12,7 +14,7 @@ module.exports = async (app)=> {
         }
     })
 
-    app.post('/login', async (req,res)=>{
+    app.post('/login', middValidacion.validarLogin, async (req,res)=>{
         let usuario = req.body
         try {
             let resultado = await controladorUsuarios.chequearUsuario(usuario)
@@ -35,7 +37,7 @@ module.exports = async (app)=> {
         }
     })
 
-    app.post('/signup', async (req,res)=>{
+    app.post('/signup', middValidacion.validarRegistro, async (req,res)=>{
         let usuario = req.body
         try {
             let resultado = await controladorUsuarios.registroNuevoUsuario(usuario)
@@ -60,31 +62,26 @@ module.exports = async (app)=> {
         }
     })
 
-    app.post('/usuario/:id', async (req, res) => {
+    app.post('/usuario/:id',  middAuth.verificacionUsuario, middValidacion.validarActualizacion, async (req, res) => {
         let id = req.params.id;
         let user = req.body;
         try {
             let resultado = await controladorUsuarios.updateUsuario(id, user);
-            if (resultado != false){
-                let tokenResult = await controladorUsuarios.generaToken(user)
-                res.json({ token: tokenResult, user: resultado })
-            }else {
-                throw new Error ("Error al Modificar")
-            }
+                res.json({ user: resultado })
         }catch (err){
-            res.status(400).json({ error: err.message}) 
+            res.status(400).json({ error: "No se pudo actualizar"}) 
         }
     })
 
-    app.get('/delete/:id', async (req,res)=>{
+    app.get('/delete/:id', middAuth.verificacionUsuario, async (req,res)=>{
         let data = req.params.id;
         try {
             let resultado = await controladorUsuarios.eliminarUsuario(data)
             if(resultado){
-                res.redirect('/usuarios');
+                res.status(200).json('ok');
             }      
-        }catch (err){
-            res.status(400).json('No se puedo eliminar el usuario')
+        }catch (error){
+            res.status(400).json({error: "Ocurrio un error no se pudo eliminar"})
         }
     })
 }
