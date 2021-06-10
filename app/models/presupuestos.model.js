@@ -1,39 +1,39 @@
-const {DataTypes, Model} = require('sequelize')
-const sequelize = require('../../db/conexion')
+const Presupuestos = require('../../db/db.presupuestos');
+const FlujoEfectivo = require('../../db/db.flujoefectivo');
+const Ingresos = require('../../db/db.ingresos');
+const IngresosValues = require('../../db/db.ingresosValores');
+const CostosDirectos = require('../../db/db.costosDirectos');
+const DirectosValues = require('../../db/db.costosDirectosValores');
+const GastosAdmon = require('../../db/db.gastosAdmon');
+const AdmonValues = require('../../db/db.gastosAdmonValores');
+const Recursos = require('../../db/db.recursos');
+const RecursosValues = require('../../db/db.recursosValores');
 
-//Definir mi Modelo con que voy a trabajar
-const Presupuestos = sequelize.define('presupuestos', {
-    id : {
-      type: DataTypes.STRING(20),
-      primaryKey: true,
-      autoIncrement: false,
-    },
-    fecha : {
-        type: DataTypes.STRING(60),
-        allowNull: false,
-    },
-    proyecto: {
-        type: DataTypes.STRING(60),
-        allowNull: false,
-    },
-    version: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    estado: {
-      type: DataTypes.STRING(20),
-      allowNull: false
-    },
-    mes: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    año: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-  },{
-    timestamps: true
-})
+module.exports = class PresupuestoModel {
+  constructor(id, fecha, proyecto, version, estado, autor, mes, anio) {        
+      this.id = id;
+      this.fecha = fecha;
+      this.proyecto = proyecto;
+      this.version = version;
+      this.estado = estado;
+      this.autor = autor;
+      this.mes = mes;
+      this.anio = anio;
+  }
 
-module.exports = Presupuestos;
+  //Crear Presupuesto
+  nuevoPresupuesto = async () => {
+  }
+
+  //Mostrar todos lo Presupuestos
+  static listarPresupuestos = async () => {
+  }
+
+  //Modificar Presupuesto
+  modificarPresupuesto = async (id) => {        
+  }
+
+  //Eliminar Presupuesto
+  static eliminarPresupuesto = async (id) => {
+  }
+} 
