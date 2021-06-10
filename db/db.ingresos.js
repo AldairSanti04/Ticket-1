@@ -1,5 +1,6 @@
-const {DataTypes, Model} = require('sequelize')
-const sequelize = require('./conexion')
+const {DataTypes, Model} = require('sequelize');
+const sequelize = require('./conexion');
+const IngresosValues = require('./db.ingresosValores');
 
 //Definir mi Modelo con que voy a trabajar
 const Ingresos = sequelize.define('ingresos', {
@@ -22,6 +23,15 @@ const Ingresos = sequelize.define('ingresos', {
     },        
 }, {
     timestamps: false
+});
+
+Ingresos.hasMany(IngresosValues, {
+    foreignKey: {
+        name: 'ingreso_id',
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    onDelete: 'CASCADE'
 });
 
 module.exports = Ingresos;

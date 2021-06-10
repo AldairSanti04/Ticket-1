@@ -8,7 +8,7 @@ const DirectosValues = sequelize.define('costos_directos_valores', {
         primaryKey: true,
         autoIncrement: true,
     },
-    ingreso_id: {
+    directo_id: {
         type: DataTypes.INTEGER,
         references: {
             model: 'costos_directos',

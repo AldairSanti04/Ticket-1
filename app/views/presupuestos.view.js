@@ -1,8 +1,8 @@
 const sequelize = require('../../db/conexion');
-const controladorUsuarios = require('../controllers/usuarios.controller');
 
 module.exports = async (app)=> {
 
+    // Endpoint de Pruebas
     app.get('/', async (req, res) => {
         let ingresos = req.body.ingresos.conceptos;
         let ingresosValues = req.body.ingresos.valores;
