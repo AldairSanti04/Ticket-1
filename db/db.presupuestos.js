@@ -14,7 +14,7 @@ const Presupuestos = sequelize.define('presupuestos', {
       autoIncrement: false,
     },
     fecha : {
-        type: DataTypes.STRING(60),
+        type: DataTypes.DATE,
         allowNull: false,
     },
     proyecto: {

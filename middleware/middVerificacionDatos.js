@@ -3,7 +3,7 @@ const validaciones = require('./verificarDatos')
 
 const validarLogin = async (req, res, next) => {
     try{
-        await Joi.attempt(req.body, validaciones.login, 'Datos incorrectos')
+        await Joi.attempt(req.body, validaciones.ModeloLogin, 'Los datos ingresados no son correctos para el login')
         return next()
     }catch (err){
         console.log(err)
@@ -13,7 +13,7 @@ const validarLogin = async (req, res, next) => {
 
 const validarRegistro = async (req, res, next) => {
     try{
-        await Joi.attempt(req.body, validaciones.registro, 'Datos incorrectos');
+        await Joi.attempt(req.body, validaciones.ModeloRegistro, 'Los datos ingresados no son correctos para realizar el registro');
         return next()
     }catch (err){
         console.log(err)
@@ -23,7 +23,7 @@ const validarRegistro = async (req, res, next) => {
 
 const validarActualizacion = async (req, res, next) => {
     try{
-        await Joi.attempt(req.body, validaciones.actualizar, 'Datos incorrectos');
+        await Joi.attempt(req.body, validaciones.ModeloActualizar, 'Los datos ingresados no son correctos para actualizar sus datos');
         return next()
     }catch (err){
         console.log(err)

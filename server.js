@@ -17,7 +17,6 @@ const AdmonValues = require('./db/db.gastosAdmonValores');
 const Recursos = require('./db/db.recursos');
 const RecursosValues = require('./db/db.recursosValores');
 
-
 app.use(express.json());
 app.use(cors());
 //app.use(midd.limiter);
