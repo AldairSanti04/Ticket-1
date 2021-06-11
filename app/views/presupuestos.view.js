@@ -1,21 +1,16 @@
 const sequelize = require('../../db/conexion');
+const controladorPresupuesto = require('../controllers/presupuestos.controller');
 
 module.exports = async (app)=> {
 
-    // Endpoint de Pruebas
     app.get('/', async (req, res) => {
-        let ingresos = req.body.ingresos.conceptos;
-        let ingresosValues = req.body.ingresos.valores;
-        let val = ingresosValues.length / ingresos.length
-        console.log(ingresosValues.slice(0,val));
-        console.log(ingresosValues.slice(val,(val*2)));
-        console.log(ingresosValues.slice(val*2,(val*3)));
-        res.status(200).json('OK')
+        res.send('Inicio de la API :)');
     })
 
     app.get('/index', async (req,res)=>{
         try{
-            res.render('index');
+            let resultado = await controladorPresupuesto.obtenerPresupuestos()
+            res.render('index',  {results:resultado});
         }catch (err){
             res.status(400).json('No se puede mostrar')
         }
@@ -26,6 +21,16 @@ module.exports = async (app)=> {
             res.render('newbudget');
         }catch (err){
             res.status(400).json('No se puede mostrar')
+        }
+    })
+    
+    app.post('/nuevoBudget', async (req, res) => {
+        let datos = req.body;
+        try {
+            let resultado = await controladorPresupuesto.nuevoBudget(datos);
+            res.status(200).json(resultado);
+        } catch (error) {
+            res.status(400).send({error: error.message});
         }
     })
 }

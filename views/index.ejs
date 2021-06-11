@@ -23,25 +23,28 @@
                 </thead>
                 <tbody>
                 <!-- foreach para recibir resultados de la tabla presupuestos -->
+                <% results.forEach((presupuesto)=>{ %>
                     <tr>
-                        <td>
-                            2014011095
+                      <td>
+                        <%= presupuesto.id %>
+                      </td>
+                      <td>
+                        <%= presupuesto.createdAt %> 
+                      </td>
+                      <td>
+                        <%= presupuesto.proyecto %>
+                      </td>
+                      <td>
+                          <%= presupuesto.version %>
                         </td>
-                        <td>
-                            2021-04-27
-                        </td>
-                        <td>
-                            Ecommerce
-                        </td>
-                        <td>
-                            1
-                        </td>                    
-                        <td>
-                            <a class="btn btn-outline-primary"><i class='bx bxs-edit'></i></a>
-                            <a class="btn btn-outline-success ms-2 me-2"><i class='bx bxl-telegram'></i></a>
-                            <a class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a>
-                        </td>
+                      <!-- referencia a ruta editar y eliminar usuario-->
+                      <td>
+                        <a class="btn btn-outline-primary"><i class='bx bxs-edit'></i></a>
+                        <a class="btn btn-outline-success ms-2 me-2"><i class='bx bxl-telegram'></i></a>
+                        <a class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a>
+                      </td>
                     </tr>
+                    <% }) %>
                 </tbody>
             </table>
         </div>

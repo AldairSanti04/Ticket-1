@@ -14,7 +14,7 @@ module.exports = {
         pass: Joi.string().required().min(8).max(20),
     }),
 
-    ModeloActualizar: Joi.object().keys({
+    modeloActualizar: Joi.object().keys({
         nombres: Joi.string().regex(/^[ .a-zA-Z]+$/).required().min(3).max(60),
         apellidos: Joi.string().regex(/^[ .a-zA-Z]+$/).required().min(3).max(60),
         usuario: Joi.string().alphanum().required().min(5).max(60),

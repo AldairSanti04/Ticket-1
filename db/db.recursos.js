@@ -10,7 +10,7 @@ const Recursos = sequelize.define('recursos', {
         autoIncrement: true,
     },
     presupuesto_id: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
         references: {
             model: 'presupuestos',
             key: 'id'

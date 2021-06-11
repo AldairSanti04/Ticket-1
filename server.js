@@ -48,15 +48,15 @@ async function inicioServidor() {
         await DirectosValues.sync({alter:true});
         await AdmonValues.sync({alter:true});
         await RecursosValues.sync({alter:true});
-        // await Usuarios.findOrCreate({
-        //     where: {
-        //         nombres: 'Aldair', 
-        //         apellidos: 'Santiago', 
-        //         email: 'aldair@admin.com', 
-        //         usuario: 'aldairsanti04', 
-        //         pass: 'holitas123', 
-        //     }
-        // })
+        await Usuarios.findOrCreate({
+            where: {
+                nombres: 'Aldair', 
+                apellidos: 'Santiago', 
+                email: 'aldair@admin.com', 
+                usuario: 'aldairsanti04', 
+                pass: 'holitas123', 
+            }
+        })
         await sequelize.authenticate();
         console.log('Conexion con la DB correcta!');
         app.listen(process.env.PORT, function (){

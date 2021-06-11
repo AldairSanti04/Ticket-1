@@ -1,4 +1,4 @@
-const {DataTypes, Model} = require('sequelize');
+const {DataTypes, Sequelize, Model} = require('sequelize');
 const sequelize = require('./conexion');
 const CostosDirectos = require('./db.costosDirectos');
 const FlujoEfectivo = require('./db.flujoefectivo');
@@ -9,13 +9,9 @@ const Ingresos = require('./db.ingresos');
 //Definir mi Modelo con que voy a trabajar
 const Presupuestos = sequelize.define('presupuestos', {
     id : {
-      type: DataTypes.STRING(20),
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: false,
-    },
-    fecha : {
-        type: DataTypes.DATE,
-        allowNull: false,
+      autoIncrement: true,
     },
     proyecto: {
         type: DataTypes.STRING(60),
@@ -34,7 +30,7 @@ const Presupuestos = sequelize.define('presupuestos', {
         allowNull: false
       },
     mes: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(20),
       allowNull: false
     },
     anio: {
@@ -48,7 +44,7 @@ const Presupuestos = sequelize.define('presupuestos', {
 Presupuestos.hasMany(CostosDirectos, {
   foreignKey: {
       name: 'presupuesto_id',
-      type: DataTypes.STRING(20),
+      type: DataTypes.INTEGER,
       allowNull: false
   },
   onDelete: 'CASCADE'
@@ -57,7 +53,7 @@ Presupuestos.hasMany(CostosDirectos, {
 Presupuestos.hasMany(FlujoEfectivo, {
   foreignKey: {
       name: 'presupuesto_id',
-      type: DataTypes.STRING(20),
+      type: DataTypes.INTEGER,
       allowNull: false
   },
   onDelete: 'CASCADE'
@@ -66,7 +62,7 @@ Presupuestos.hasMany(FlujoEfectivo, {
 Presupuestos.hasMany(GastosAdmon, {
   foreignKey: {
       name: 'presupuesto_id',
-      type: DataTypes.STRING(20),
+      type: DataTypes.INTEGER,
       allowNull: false
   },
   onDelete: 'CASCADE'
@@ -75,7 +71,7 @@ Presupuestos.hasMany(GastosAdmon, {
 Presupuestos.hasMany(Recursos, {
   foreignKey: {
       name: 'presupuesto_id',
-      type: DataTypes.STRING(20),
+      type: DataTypes.INTEGER,
       allowNull: false
   },
   onDelete: 'CASCADE'
@@ -84,7 +80,7 @@ Presupuestos.hasMany(Recursos, {
 Presupuestos.hasMany(Ingresos, {
   foreignKey: {
       name: 'presupuesto_id',
-      type: DataTypes.STRING(20),
+      type: DataTypes.INTEGER,
       allowNull: false
   },
   onDelete: 'CASCADE'

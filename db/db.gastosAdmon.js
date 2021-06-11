@@ -10,7 +10,7 @@ const GastosAdmon = sequelize.define('gastos_administrativos', {
         autoIncrement: true,
     },
     presupuesto_id: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
         references: {
             model: 'presupuestos',
             key: 'id'

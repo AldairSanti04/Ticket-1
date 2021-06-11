@@ -10,7 +10,7 @@ const CostosDirectos = sequelize.define('costos_directos', {
         autoIncrement: true,
     },
     presupuesto_id: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.INTEGER,
         references: {
             model: 'presupuestos',
             key: 'id'
