@@ -30,7 +30,9 @@ module.exports = async (app)=> {
         let datos = req.body;
         try {
             let resultado = await controladorPresupuesto.nuevoBudget(datos);
-            res.status(200).json(resultado);
+            if(resultado){
+                res.status(200).json('ok');
+            }
         } catch (error) {
             res.status(400).json({error: error.message});
         }

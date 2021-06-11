@@ -14,8 +14,8 @@ module.exports.nuevoBudget = async (data) => {
     const { proyecto, version, estado, autor, mes, anio, valores } = data;
     let nuevoBudget = new PresupuestoModel(proyecto, version, estado, autor, mes, anio, valores);      
     try {
-        let res = await nuevoBudget.nuevoPresupuesto();
-        return res;
+        let resultado = await nuevoBudget.nuevoPresupuesto();
+        return resultado;
     } catch (error) {
         throw error;
     }    
@@ -23,8 +23,8 @@ module.exports.nuevoBudget = async (data) => {
 
 module.exports.deleteBudget = async (data) => {
     try {
-        let res = await PresupuestoModel.eliminarPresupuesto(data);
-        return res;
+        let resultado = await PresupuestoModel.eliminarPresupuesto(data);
+        return resultado;
     } catch (error) {
         throw new Error ('No se pudo eliminar el presupuesto seleccionado')
     }    

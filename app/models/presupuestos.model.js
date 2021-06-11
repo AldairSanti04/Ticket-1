@@ -93,9 +93,9 @@ module.exports = class PresupuestoModel {
                 });
             });
         });
-      return 'Presupuesto creado';
+      return true;
     } catch (error) {
-        throw new Error('Error al crear presupuesto');
+        throw new Error('No se pudo crear el Presupuesto');
     }
   }
 
@@ -103,6 +103,11 @@ module.exports = class PresupuestoModel {
   static listarPresupuestos = async () => {
       try {
         let resultado = await sequelize.query("SELECT id, proyecto, version, CONVERT(varchar(10), createdAt) AS fecha FROM dbo.presupuestos  WHERE estado = 'Activo'")
+        // let resultado = await Presupuestos.findAll({
+        //     where: { estado: 'Activo'},
+        //     //attributes: ['id', 'proyecto', 'version', 'createdAt'],
+        //     attributes: [[sequelize.fn('sum', sequelize.col('createdAt')), 'total']]
+        // })
         return resultado[0]
       } catch (error) {
         throw new Error('Error al consultar la DB');
