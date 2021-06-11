@@ -102,7 +102,7 @@ module.exports = class PresupuestoModel {
   //Mostrar todos lo Presupuestos
   static listarPresupuestos = async () => {
       try {
-        let resultado = await sequelize.query("SELECT * FROM dbo.presupuestos WHERE estado = 'Activo'")
+        let resultado = await sequelize.query("SELECT id, proyecto, version, CONVERT(varchar(10), createdAt) AS fecha FROM dbo.presupuestos  WHERE estado = 'Activo'")
         return resultado[0]
       } catch (error) {
         throw new Error('Error al consultar la DB');
