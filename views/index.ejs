@@ -41,12 +41,12 @@
                       <td>
                         <a class="btn btn-outline-primary"><i class='bx bxs-edit'></i></a>
                         <a class="btn btn-outline-success ms-2 me-2"><i class='bx bxl-telegram'></i></a>
-                        <a class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a>
+                        <a onclick="eliminarPresupuesto('<%= presupuesto.id %>')" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i></a>
                       </td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
         </div>
-        
+        <script src="js/index.js"></script>
         <%- include('includes/footer') %>

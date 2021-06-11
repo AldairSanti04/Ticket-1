@@ -115,5 +115,13 @@ module.exports = class PresupuestoModel {
 
   //Eliminar Presupuesto
   static eliminarPresupuesto = async (id) => {
+    try {
+        await Presupuestos.update({
+            estado: 'Eliminado'}, 
+            {where: { id : id}})
+        return true;
+    }catch (err){
+        throw new Error ('No se pudo eliminar el presupuesto seleccionado')
+    }
   }
 } 

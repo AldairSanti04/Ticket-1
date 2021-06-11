@@ -11,7 +11,6 @@ module.exports.obtenerPresupuestos = async () => {
 }
 
 module.exports.nuevoBudget = async (data) => {
-    console.log(data);
     const { proyecto, version, estado, autor, mes, anio, valores } = data;
     let nuevoBudget = new PresupuestoModel(proyecto, version, estado, autor, mes, anio, valores);      
     try {
@@ -19,5 +18,14 @@ module.exports.nuevoBudget = async (data) => {
         return res;
     } catch (error) {
         throw error;
+    }    
+}
+
+module.exports.deleteBudget = async (data) => {
+    try {
+        let res = await PresupuestoModel.eliminarPresupuesto(data);
+        return res;
+    } catch (error) {
+        throw new Error ('No se pudo eliminar el presupuesto seleccionado')
     }    
 }
