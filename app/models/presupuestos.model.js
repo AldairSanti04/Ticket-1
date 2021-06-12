@@ -114,8 +114,164 @@ module.exports = class PresupuestoModel {
       }
   }
 
+  static detallesPresupuesto = async (id) => {
+    try{
+        let presupuesto = await Presupuestos.findOne({
+            where: {
+                id: id,
+            },
+            attributes: ['id', 'proyecto', 'version', 'estado', 'autor', 'anio', 'mes', 'createdAt'],
+            include: [                                                        
+                {
+                    model: FlujoEfectivo,
+                    attributes: ['id', 'ingreso'],                        
+                },
+                {
+                    model: Ingresos,
+                    attributes: ['id', 'concepto'],
+                    include: {
+                        model: IngresosValues,
+                        attributes: ['id', 'valor']
+                    }
+                },
+                {
+                    model: CostosDirectos,
+                    attributes: ['id', 'concepto'],
+                    include: {
+                        model: DirectosValues,
+                        attributes: ['id', 'valor']
+                    }
+                },
+                {
+                    model: GastosAdmon,
+                    attributes: ['id', 'concepto'],
+                    include: {
+                        model: AdmonValues,
+                        attributes: ['id', 'valor']
+                    }
+                },
+                {
+                    model: Recursos,
+                    attributes: ['id', 'concepto', 'costo'],
+                    include: {
+                        model: RecursosValues,
+                        attributes: ['id', 'valor']
+                    }
+                }
+            ] 
+            
+        });           
+        if(presupuesto == null){
+            return false;
+        } else {
+            return presupuesto;
+        }
+    } catch (error) {
+        throw new Error('Error al consultar la DB');
+      }
+  }
+
   //Modificar Presupuesto
-  modificarPresupuesto = async (id) => {        
+  modificarPresupuesto = async (id) => {
+    try {
+        let actualizaPresupuesto = await Presupuestos.findOne({
+            where: {id: id}
+        })
+
+        if(actualizaPresupuesto != null){
+            await Presupuestos.update({
+                proyecto: this.proyecto,
+                version: this.version,
+                estado: this.estado,
+                autor: this.autor,
+                mes: this.mes,
+                anio: this.anio},
+                {where: { id : id}})
+
+                //Se eliminan los datos anteriores para dar espacio a los nuevos
+                    FlujoEfectivo.destroy({
+                        where: { presupuesto_id: id }
+                    });
+                    Ingresos.destroy({
+                        where: { presupuesto_id: id }
+                    });
+                    CostosDirectos.destroy({
+                        where: { presupuesto_id: id }
+                    });
+                    GastosAdmon.destroy({
+                        where: { presupuesto_id: id }
+                    });
+                    Recursos.destroy({
+                        where: { presupuesto_id: id }
+                    });                        
+            
+                //Guardar todos los datos que son parte del presupuesto
+                    this.valores.flujoEfectivo.forEach(async ingreso => {
+                        await FlujoEfectivo.create({
+                            ingreso: ingreso,
+                            presupuesto_id: id
+                        });
+                    });
+            
+                    this.valores.ingresos.forEach(async ingreso => {
+                        let nuevoIngreso = await Ingresos.create({
+                            concepto: ingreso.concepto,
+                            presupuesto_id: id
+                        });
+                        ingreso.valores.forEach(async valorI => {
+                            await IngresosValues.create({
+                                valor: valorI,
+                                ingreso_id: nuevoIngreso.id
+                            });
+                        });
+                    });
+                    
+                    this.valores.directos.forEach(async costoD => {
+                        let nuevoDirecto = await CostosDirectos.create({
+                            concepto: costoD.concepto,
+                            presupuesto_id: id
+                        });
+                        costoD.valores.forEach(async valorD => {
+                            await DirectosValues.create({
+                                valor: valorD,
+                                directo_id: nuevoDirecto.id
+                            });
+                        });
+                    });
+                    
+                    this.valores.administrativos.forEach(async gastoAdmon => {
+                        let nuevoGasto = await GastosAdmon.create({
+                            concepto: gastoAdmon.concepto,
+                            presupuesto_id: id
+                        });
+                        gastoAdmon.valores.forEach(async valorA => {
+                            await AdmonValues.create({
+                                valor: valorA,
+                                admon_id: nuevoGasto.id
+                            });
+                        });
+                    });            
+            
+                    this.valores.recursos.forEach(async recurso => {
+                        let nuevoRecurso = await Recursos.create({
+                            concepto: recurso.concepto,
+                            costo: recurso.costoMensual,
+                            presupuesto_id: id
+                        });
+                        recurso.valores.forEach(async valorRP => {
+                            await RecursosValues.create({
+                                valor: valorRP,
+                                recurso_id: nuevoRecurso.id
+                            });
+                        });
+                    });
+            return true;
+        } else {
+            throw new Error('No existe el Presupuesto');
+        }
+      } catch (error) {
+          throw new Error('No se pudo Modificar el Presupuesto');
+      }
   }
 
   //Eliminar Presupuesto

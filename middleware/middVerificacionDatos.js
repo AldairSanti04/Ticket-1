@@ -31,8 +31,19 @@ const validarActualizacion = async (req, res, next) => {
     }
 }
 
+const validarPresupuesto = async (req, res, next) => {
+    try{
+        await Joi.attempt(req.body, validaciones.modeloPresupuesto, 'Los datos ingresados no son correctos para el Presupuesto');
+        return next()
+    }catch (err){
+        console.log(err)
+        res.status(500).json({error: err.message})
+    }
+}
+
 module.exports = {
     validarLogin,
     validarRegistro,
     validarActualizacion,
+    validarPresupuesto
 }

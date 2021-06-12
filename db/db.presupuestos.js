@@ -27,15 +27,15 @@ const Presupuestos = sequelize.define('presupuestos', {
     },
     autor: {
         type: DataTypes.STRING(200),
-        allowNull: false
+        allowNull: true
       },
     mes: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: true
     },
     anio: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
   },{
     timestamps: true

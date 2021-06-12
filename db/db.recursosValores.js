@@ -16,7 +16,7 @@ const RecursosValues = sequelize.define('recursos_valores', {
         },
         allowNull: false        
     },
-    porcentaje: {
+    valor: {
         type: DataTypes.INTEGER,
         allowNull: true,        
     },    
